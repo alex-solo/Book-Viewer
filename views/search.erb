@@ -1,0 +1,31 @@
+<h2 class="content-subhead">Search</h2>
+
+<form action="/search" method="get">
+  <input name="query" value="<%= params[:query] %>">
+  <button type="submit">Search</button>
+</form>
+
+<% if @search %>
+  <h2>Results for '<%= @search %>'</h2>
+
+  <ul>
+    <% if !@results.empty? %>
+      <% @results.each do |num, chp| %>
+        <li><a href="/chapters/<%= num %>"><%= chp %></a></li>
+        <% in_paragraphs(File.read("data/chp#{num}.txt")).each_with_index do |par, idx| %>
+          <% if par.include?(@search) %>
+            <ul>
+              <li>
+                <a href="/chapters/<%= num %>#paragraph<%= idx %>">
+                  <%= make_strong(par, @search) %>
+                </a>
+              </li>
+            </ul>
+          <% end %>
+        <% end %>  
+      <% end %>
+    <% else %>
+      <p>Sorry, no matches were found</p>
+    <% end %>
+  </ul>
+<% end %>
