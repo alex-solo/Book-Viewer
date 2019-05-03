@@ -1,3 +1,3 @@
-# Sinatra Book Viewer
+# Book Viewer
 
-https://book-viewer-launchschool.herokuapp.com/
+Sinatra book viewer - Adventures of Sherlock Holmes organized by chapter
